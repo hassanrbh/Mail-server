@@ -9,6 +9,28 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/components/inbox.js":
+/*!*********************************!*\
+  !*** ./src/components/inbox.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"inbox\": () => (/* binding */ inbox)\n/* harmony export */ });\n/* harmony import */ var _data_message_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../data/message_store */ \"./src/data/message_store.js\");\n\n\nlet inbox = {\n    render: () => {\n        let container = document.createElement('ul');\n        container.className = \"messages\";\n        debugger\n        _data_message_store__WEBPACK_IMPORTED_MODULE_0__.messageStore.getInboxMessage().forEach((message) => {\n            container.appendChild(renderMessage(message));\n        })\n        return container;\n    },\n    renderMessage: (message) => {\n        let node = document.createElement('li');\n        console.log(node);\n        node.className = \"message\";\n        let renderto = undefined.renderTo(message);\n        console.log(renderto);\n        node.innerHTML = renderto;\n        console.log(node)\n        return node;\n    },\n    renderTo: (message) => {\n        let span_1 = `<span class=\"from\">${message.from}</span>`;\n        let span_2 = `<span class=\"subject\">${message.subject}</span>`;\n        let span_3 = `<span class=\"body\">${message.body}</span>`;\n\n        return `${span_1} ${span_2} ${span_3}`\n    }\n}\n\n//# sourceURL=webpack://skeleton-13/./src/components/inbox.js?");
+
+/***/ }),
+
+/***/ "./src/data/message_store.js":
+/*!***********************************!*\
+  !*** ./src/data/message_store.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"messageStore\": () => (/* binding */ messageStore)\n/* harmony export */ });\nlet messages = {\n    sent: [{\n            to: \"friend@mail.com\",\n            subject: \"Check this out\",\n            body: \"It's so cool\"\n        },\n        {\n            to: \"person@mail.com\",\n            subject: \"zzz\",\n            body: \"so booring\"\n        }\n    ],\n    inbox: [{\n            from: \"grandma@mail.com\",\n            subject: \"Fwd: Fwd: Fwd: Check this out\",\n            body: \"Stay at home mom discovers cure for leg cramps. Doctors hate her\"\n        },\n        {\n            from: \"person@mail.com\",\n            subject: \"Questionnaire\",\n            body: \"Take this free quiz win $1000 dollars\"\n        }\n    ]\n};\n\nlet messageStore = {\n    getInboxMessage: () => {\n        return messages.inbox;\n    },\n    getSendMessages: () => {\n        return messages.sent;\n    }\n};\n\n//# sourceURL=webpack://skeleton-13/./src/data/message_store.js?");
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
@@ -16,7 +38,7 @@
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./router */ \"./src/router.js\");\n/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_router__WEBPACK_IMPORTED_MODULE_0__);\n\n\ndocument.addEventListener(\"DOMContentLoaded\", () => {\n    let content = document.querySelector(\".content\");\n    let router = new (_router__WEBPACK_IMPORTED_MODULE_0___default())(content);\n    router.start();\n\n    let sidebar_nav = document.querySelector(\".sidebar-nav\");\n    sidebar_nav.childNodes.forEach((node) => {\n        node.addEventListener(\"click\", (e) => {\n            let target_el = e.target.textContent.toLowerCase();\n\n            window.location.hash = target_el;\n        })\n    })\n})\n\n//# sourceURL=webpack://skeleton-13/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./router */ \"./src/router.js\");\n/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_router__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _components_inbox__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/inbox */ \"./src/components/inbox.js\");\n\n\n\nlet routes = {\n    \"inbox\": _components_inbox__WEBPACK_IMPORTED_MODULE_1__.inbox,\n};\n\ndocument.addEventListener(\"DOMContentLoaded\", () => {\n    let content = document.querySelector(\".content\");\n    let router = new (_router__WEBPACK_IMPORTED_MODULE_0___default())(content, routes);\n    router.start();\n\n    let sidebar_nav = document.querySelector(\".sidebar-nav\");\n    sidebar_nav.childNodes.forEach((node) => {\n        node.addEventListener(\"click\", (e) => {\n            let target_el = e.target.textContent.toLowerCase();\n            window.location.hash = target_el;\n        })\n    })\n})\n\n//# sourceURL=webpack://skeleton-13/./src/index.js?");
 
 /***/ }),
 
@@ -26,7 +48,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _rou
   \***********************/
 /***/ ((module) => {
 
-eval("class Router {\n    constructor(node) {\n        this.node = node;\n    }\n\n    start() {\n        this.render();\n        window.addEventListener(\"hashchange\", () => {\n            this.render();\n        });\n    }\n\n    activeRoute() {\n        return window.location.hash.substring(1);\n    }\n\n    render() {\n        this.node.innerHTML = \"\";\n        let component = this.activeRoute();\n        let new_route = document.createElement(\"p\");\n        new_route.innerHTML = component;\n        this.node.appendChild(new_route);\n    }\n}\n\nmodule.exports = Router;\n\n//# sourceURL=webpack://skeleton-13/./src/router.js?");
+eval("class Router {\n    constructor(node, routes) {\n        this.node = node;\n        this.routes = routes;\n    }\n\n    start() {\n        this.render();\n        window.addEventListener(\"hashchange\", () => {\n            this.render();\n        });\n    }\n\n    activeRoute() {\n        let curr_route = window.location.hash.substring(1);\n        let component = this.routes[curr_route]\n        return component;\n    }\n\n    render() {\n        this.node.innerHTML = \"\";\n        let component = this.activeRoute();\n        if (component) {\n            this.node.appendChild(component.render());\n        }\n    }\n}\n\nmodule.exports = Router;\n\n//# sourceURL=webpack://skeleton-13/./src/router.js?");
 
 /***/ })
 
